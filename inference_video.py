@@ -52,7 +52,7 @@ def main(labelmap_path, model_path, tf_record_path, config_path, output_path):
     images = []
     logger.info(f'Inference on {tf_record_path}')
     for idx, batch in enumerate(dataset):
-        if idx % 50:
+        if idx % 10 == 0:
             logger.info(f'Step: {idx}')
         # add new axis and feed into model 
         input_tensor = batch['image']
@@ -94,7 +94,7 @@ def main(labelmap_path, model_path, tf_record_path, config_path, output_path):
         image = images[idx]
         im_obj.set_data(image)
         
-    anim = animation.FuncAnimation(f, animate, frames=198)
+    anim = animation.FuncAnimation(f, animate, frames=len(images))
     anim.save(output_path, fps=5, dpi=300)
 
 
